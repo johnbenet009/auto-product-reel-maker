@@ -18,10 +18,10 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def process_data():
     try:
         data = request.get_json()
-        domain = data['Domain']
+        domain1 = data['Domain'].replace(".", "") 
         currency = data['currency']
         products = data['products']
-        domain_dir = os.path.join(os.getcwd(), domain)
+        domain_dir = os.path.join(os.getcwd(), domain1)
 
         if os.path.exists(domain_dir):
             shutil.rmtree(domain_dir)
@@ -47,7 +47,7 @@ def process_data():
 
         now = datetime.now()
         formatted_date = now.strftime("%B %d, %Y")
-        intro_text = f"Trending discounted products from {domain} today {formatted_date}!"
+        intro_text = f"Trending discounted products from {domain1} today {formatted_date}!"
         intro_audio_filename = os.path.join(images_dir, "intro.mp3")
         tts(intro_text, Voice.US_MALE_4, intro_audio_filename, play_sound=False)
         intro_audio = mpe.AudioFileClip(intro_audio_filename)
@@ -64,7 +64,7 @@ def process_data():
           if f.endswith(('.jpg','.jpeg','.png','.mp3')):
             os.remove(os.path.join(images_dir,f))
 
-        download_link = f"/download/{domain}/final.mp4"
+        download_link = f"https://vidmaker.cart9.com.ng/{domain}/images/final.mp4"
         return jsonify({"message": "Images downloaded and processed successfully", "download_link": download_link, "currency": currency}), 200
 
     except KeyError as e:
