@@ -1,0 +1,7 @@
+Flask
+requests
+Pillow
+moviepy
+pydub
+playsound
+importlib-resources
