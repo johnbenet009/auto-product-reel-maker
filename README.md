@@ -80,5 +80,3 @@ Run the script using python app.py.
 Send a POST request to the / endpoint with the JSON payload.
 
 Usage: This script is a useful tool for quickly generating social media product promotion videos, saving time and effort compared to manual video editing. The concurrent processing using ThreadPoolExecutor helps speed up video creation for many products. Error handling is implemented to provide useful error messages.
-
-This detailed description should help anyone forking the project to understand its functionality, setup, and usage. Remember to replace placeholder image URLs with your actual product image URLs.
