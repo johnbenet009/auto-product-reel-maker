@@ -18,10 +18,11 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 def process_data():
     try:
         data = request.get_json()
-        domain1 = data['Domain'].replace(".", "") 
+         maindomain = data['Domain'] 
+        domain = data['Domain'].replace(".", "") 
         currency = data['currency']
         products = data['products']
-        domain_dir = os.path.join(os.getcwd(), domain1)
+        domain_dir = os.path.join(os.getcwd(), domain)
 
         if os.path.exists(domain_dir):
             shutil.rmtree(domain_dir)
@@ -47,7 +48,7 @@ def process_data():
 
         now = datetime.now()
         formatted_date = now.strftime("%B %d, %Y")
-        intro_text = f"Trending discounted products from {domain1} today {formatted_date}!"
+        intro_text = f"Trending discounted products from {maindomain} today {formatted_date}!"
         intro_audio_filename = os.path.join(images_dir, "intro.mp3")
         tts(intro_text, Voice.US_MALE_4, intro_audio_filename, play_sound=False)
         intro_audio = mpe.AudioFileClip(intro_audio_filename)
